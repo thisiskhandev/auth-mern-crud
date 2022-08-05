@@ -10,5 +10,3 @@ mongoose
     console.log(`DB Connection successful!`);
   })
   .catch((err) => console.log(`DB No Connection! --> ${err}`));
-
-  
