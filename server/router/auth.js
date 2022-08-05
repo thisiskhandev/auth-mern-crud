@@ -9,33 +9,26 @@ const middleware = (req, res, next) => {
   next();
 };
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   const { name, email, phone, password, cpassword } = req.body;
   //   console.log(name);
 
   if (!name || !email || !phone || !password || !cpassword) {
     return res.status(422).json({ error: "Please fill all the data - Server" });
   }
-  //   left wala db ha or right wala jo humne fill kia ha
-  User.findOne({ email: email })
-    .then((userExist) => {
-      if (userExist) {
-        return res.status(422).json({ error: "Email already exist!" });
-      }
-
-      const user = new User({ name, email, phone, password, cpassword });
-      user
-        .save()
-        .then(() => {
-          res
-            .status(201)
-            .json({ message: "User registered successfull in DB!" });
-        })
-        .catch((err) => res.status(500).json({ error: `Failed to register! ${err}` }));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    //   left wala db ha or right wala jo humne fill kia ha
+    const userExist = await User.findOne({ email: email });
+    if (userExist) {
+      return res.status(422).json({ error: "Email already exist!" });
+    }
+    const user = new User({ name, email, phone, password, cpassword });
+    await user.save();
+    res.status(201).json({ message: "user registered successfully!", user});
+    console.log(user);
+  } catch (err) {
+    console.log(err);
+  }
   //   res.json({ message: req.body });
 });
 
