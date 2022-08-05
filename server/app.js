@@ -1,7 +1,11 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const app = express();
 
-PORT = 8000;
+dotenv.config({ path: "./config.env" });
+require("./db/conn");
+
+const PORT = process.env.PORT;
 
 const middleware = (req, res, next) => {
   console.log(`This is middleware!`);
@@ -13,11 +17,12 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
+  console.log(`Home called!`);
   res.send(`Hello from server - Homepage`);
 });
 
 app.get("/about", middleware, (req, res) => {
-  console.log(`Hello about`);
+  console.log(`About called!`);
   res.send(`Hello from server - About`);
 });
 
