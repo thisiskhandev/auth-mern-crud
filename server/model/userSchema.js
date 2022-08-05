@@ -17,12 +17,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cparssword: {
+  cpassword: {
     type: String,
     required: true,
   },
 });
 // Models
-const User = mongoose.model("USER", userSchema);
+const User = new mongoose.model("USER", userSchema);
 
-module.export = User;
+module.exports = User;
