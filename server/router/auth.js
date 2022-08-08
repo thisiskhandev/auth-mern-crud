@@ -24,12 +24,22 @@ router.post("/register", async (req, res) => {
     }
     const user = new User({ name, email, phone, password, cpassword });
     await user.save();
-    res.status(201).json({ message: "user registered successfully!", user});
+    res.status(201).json({ message: "user registered successfully!", user });
     console.log(user);
   } catch (err) {
     console.log(err);
   }
   //   res.json({ message: req.body });
+});
+
+router.get("/get", async (req, res) => {
+  try {
+    const userdata = await User.find();
+    res.status(201).json(userdata);
+    // console.log(userdata);
+  } catch (error) {
+    res.status(422).json(error);
+  }
 });
 
 router.get("/", (req, res) => {
