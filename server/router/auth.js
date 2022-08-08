@@ -20,12 +20,20 @@ router.post("/register", async (req, res) => {
     //   left wala db ha or right wala jo humne fill kia ha
     const userExist = await User.findOne({ email: email });
     if (userExist) {
-      return res.status(422).json({ error: "Email already exist!" });
+      return res
+        .status(422)
+        .json({ error: "User already registered with same Email!" });
+    } else if (password != cpassword) {
+      return res
+        .status(422)
+        .json({ error: "Passwords not matched!" });
+    } else {
+      const user = new User({ name, email, phone, password, cpassword });
+
+      await user.save();
+      res.status(201).json({ message: "user registered successfully!", user });
+      console.log(user);
     }
-    const user = new User({ name, email, phone, password, cpassword });
-    await user.save();
-    res.status(201).json({ message: "user registered successfully!", user });
-    console.log(user);
   } catch (err) {
     console.log(err);
   }
