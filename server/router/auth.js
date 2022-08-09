@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 
 require("../db/conn");
 const User = require("../model/userSchema");
@@ -24,14 +25,12 @@ router.post("/register", async (req, res) => {
         .status(422)
         .json({ error: "User already registered with same Email!" });
     } else if (password != cpassword) {
-      return res
-        .status(422)
-        .json({ error: "Passwords not matched!" });
+      return res.status(422).json({ error: "Passwords not matched!" });
     } else {
       const user = new User({ name, email, phone, password, cpassword });
 
       await user.save();
-      res.status(201).json({ message: "user registered successfully!", user });
+      res.status(201).json({ message: "User registered successfully!", user });
       console.log(user);
     }
   } catch (err) {
@@ -40,6 +39,7 @@ router.post("/register", async (req, res) => {
   //   res.json({ message: req.body });
 });
 
+// Get All user data
 router.get("/get", async (req, res) => {
   try {
     const userdata = await User.find();
@@ -50,15 +50,27 @@ router.get("/get", async (req, res) => {
   }
 });
 
+// login route
 router.get("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "Please fill the data!" });
+    }
+
     const userLogin = await User.findOne({ email: email });
-    console.log(userLogin);
-    if (!userLogin) {
-      res.status(400).json({ message: "Please enter correctly data!" });
+    if (userLogin) {
+      const isMatch = await bcrypt.compare(password, userLogin.password);
+      // console.log(userLogin);
+      if (!isMatch) {
+        res.status(400).json({ message: "Password did not match!" });
+      } else {
+        res
+          .status(201)
+          .json({ message: "User signin successfull!", userLogin });
+      }
     } else {
-      res.status(201).json({ message: userLogin });
+      res.status(400).json({ message: "Invalid Credentials!" });
     }
   } catch (error) {
     console.log(error);
@@ -66,7 +78,7 @@ router.get("/signin", async (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  console.log(`Home called from routerJS!`);
+  console.log(`Home called!`);
   res.send(`Hello from server - RouterJS`);
 });
 
