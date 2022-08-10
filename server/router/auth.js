@@ -65,6 +65,12 @@ router.get("/signin", async (req, res) => {
 
       const token = await userLogin.generateAuthToken();
       console.log(token);
+
+      // Creating cookies
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 600000),
+        httpOnly: true,
+      });
       // console.log(userLogin);
       if (!isMatch) {
         res.status(400).json({ message: "Password did not match!" });
@@ -87,6 +93,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/about", middleware, (req, res) => {
+  // res.cookie("test", "Khan");
   console.log(`About called!`);
   res.send(`Hello from server - About`);
 });
