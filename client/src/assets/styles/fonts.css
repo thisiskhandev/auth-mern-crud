@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "JackFont";
+  src: local("JackFont"), url(../fonts/Hi-Jack.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Digital";
+  src: local("Digital"), url(../fonts/digital-7.woff2) format("woff2");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");

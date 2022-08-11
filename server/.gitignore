@@ -1,3 +1,9 @@
-.gitignore
-node_modules
+# dependencies
+/node_modules
+
+
+/.gitignore
+
+# misc
 config.env
+/config.env
