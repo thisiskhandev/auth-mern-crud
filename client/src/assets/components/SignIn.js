@@ -65,7 +65,7 @@ const SignIn = () => {
               <button
                 type="submit"
                 className="btn btn-secondary  submit"
-                onClick={(e) => e.preventDefaul()}
+                onClick={(e) => e.preventDefault()}
               >
                 Sign In
               </button>

@@ -6,6 +6,7 @@ $font-digital: "Digital", monospace;
 $color-primary: #e43a45;
 $color-secondary: #5578eb;
 $color-secondary-hover: #335de7;
+$color-light: #f3f5ff;
 $color-secondary-gradient: linear-gradient(80deg, #1753c8, #3e93ce);
 $shadow-secondary: 0 9px 16px 0 #5d78ff40;
 $color-links: #374afb;
@@ -190,6 +191,21 @@ select {
 //     display: none;
 //   }
 // }
+
+header {
+  nav {
+    background-color: $color-light;
+  }
+}
+
+main.home {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(243, 245, 255, 1) 50%
+  );
+}
 
 .login {
   background: url("../images/bg-auth.jpg") no-repeat fixed center;

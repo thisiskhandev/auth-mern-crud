@@ -3,16 +3,20 @@ const Navbar = () => {
   let location = useLocation();
   location = location.pathname.replaceAll("/", "");
   // console.log(location);
+  let URL = window.location.href;
+  let result = URL.substr(0, URL.lastIndexOf("/"));
+  // console.log(result);
   let body = document.getElementsByTagName("body")[0];
   if (body.classList.length === 0) {
     body.classList = "homepage";
   } else {
     body.classList = location;
   }
+
   return (
     <>
       <header>
-        <nav className="navbar bg-base-200 mb-10">
+        <nav className="navbar mb-1">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex="0" className="btn btn-ghost btn-circle">
@@ -101,6 +105,18 @@ const Navbar = () => {
             </button>
           </div>
         </nav>
+        <section className="container mx-auto">
+          <div class="text-sm breadcrumbs">
+            <ul>
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li className="capitalize">
+              {location}
+              </li>
+            </ul>
+          </div>
+        </section>
       </header>
     </>
   );
