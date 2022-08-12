@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../images/logos/Logo_Blogely.svg";
+import Logo from "../assets/images/logos/Logo_Blogely.svg";
 
 const SignIn = () => {
   const [inpval, setInpval] = useState({

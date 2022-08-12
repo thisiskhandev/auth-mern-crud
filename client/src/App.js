@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./assets/components/routes/Navbar";
-import Routings from "./assets/components/routes/Routings";
+import Navbar from "./components/routes/Navbar";
+import Routings from "./components/routes/Routings";
 import "./assets/styles/styles.scss";
 
 const App = () => {
