@@ -1,10 +1,14 @@
-import Signin from "./assets/components/SignIn";
+import React from "react";
+import Navbar from "./assets/components/routes/Navbar";
+import Routings from "./assets/components/routes/Routings";
 import "./assets/styles/styles.scss";
+
 const App = () => {
   return (
-    <>
-      <Signin />
-    </>
+    <React.Fragment>
+      <Navbar />
+      <Routings />
+    </React.Fragment>
   );
 };
 

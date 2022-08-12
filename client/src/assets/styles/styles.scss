@@ -1,13 +1,5 @@
 @import url("./fonts.css");
 
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
 $font-heading: "JackFont", Arial, Helvetica, sans-serif;
 $font-normal: "Open Sans", Arial, Helvetica, sans-serif;
 $font-digital: "Digital", monospace;
@@ -18,6 +10,30 @@ $color-secondary-gradient: linear-gradient(80deg, #1753c8, #3e93ce);
 $shadow-secondary: 0 9px 16px 0 #5d78ff40;
 $color-links: #374afb;
 
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-secondary;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $color-primary;
+}
+
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -26,12 +42,6 @@ html {
 
 h1 {
   font-family: $font-heading;
-}
-
-html,
-body,
-#root {
-  overflow-x: hidden;
 }
 
 body,
@@ -175,6 +185,12 @@ select {
 //   }
 // }
 
+// .signin {
+//   header {
+//     display: none;
+//   }
+// }
+
 .login {
   background: url("../images/bg-auth.jpg") no-repeat fixed center;
 }
@@ -193,11 +209,11 @@ button.submit {
   padding: 30px;
 }
 
-[type="checkbox" ]:checked {
-    border-color: $color-secondary;
-    background: $color-secondary;
+[type="checkbox"]:checked {
+  border-color: $color-secondary;
+  background: $color-secondary;
 }
 
 input[type="email"] {
-    color: $color-primary;
+  color: $color-primary;
 }
