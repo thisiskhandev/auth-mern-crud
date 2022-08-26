@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import Logo from "../assets/images/logos/Logo_Blogely.svg";
+import { NavLink } from "react-router-dom";
+import Logo from "../../assets/images/logos/Logo_Blogely.svg";
 
-const SignIn = () => {
+const SignUp = () => {
   const [inpval, setInpval] = useState({
+    name: "",
     email: "",
+    phone: "",
     password: "",
+    cpassword: "",
   });
 
   const setData = (e) => {
@@ -25,10 +29,20 @@ const SignIn = () => {
           <form action="">
             <div>
               <img src={Logo} alt="Test" width="250" className="m-auto" />
-              <h1 className="text-xl my-12">SignIn</h1>
+              <h1 className="text-xl my-12">SignUp</h1>
             </div>
-            <div>
+            <div className="max-w-xs">
+            <input
+                required
+                type="text"
+                placeholder="User Name"
+                className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
+                name="name"
+                value={inpval.name}
+                onChange={setData}
+              />
               <input
+                required
                 type="email"
                 placeholder="Email"
                 className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
@@ -37,6 +51,16 @@ const SignIn = () => {
                 onChange={setData}
               />
               <input
+                required
+                type="tel"
+                placeholder="Phone Number"
+                className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
+                name="phone"
+                value={inpval.phone}
+                onChange={setData}
+              />
+              <input
+                required
                 type="password"
                 placeholder="Password"
                 className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
@@ -44,41 +68,34 @@ const SignIn = () => {
                 value={inpval.password}
                 onChange={setData}
               />
+              <input
+                required
+                type="password"
+                placeholder="Confirm Password"
+                className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
+                name="cpassword"
+                value={inpval.cpassword}
+                onChange={setData}
+              />
             </div>
-            <div className="flex items-center justify-between my-8">
-              <div>
-                <label className="cursor-pointer flex items-center text-sm font-normal">
-                  <input type="checkbox" className="toggle" />
-                  &nbsp;Remember Me
-                </label>
-              </div>
-              <div>
-                <a
-                  href="/"
-                  className="text-sm font-semibold text-secondary hover:text-accent underline hover:no-underline"
-                >
-                  Forgotten Password
-                </a>
-              </div>
-            </div>
-            <div>
+            <div className="mt-5">
               <button
                 type="submit"
-                className="btn btn-secondary  submit"
+                className="btn btn-primary submit"
                 onClick={(e) => e.preventDefault()}
               >
-                Sign In
+                Sign Up
               </button>
             </div>
           </form>
           <div className="mt-5 flex justify-center">
-            <h6 className="text-sm mr-2">Don't have an account yet?</h6>
-            <a
-              href="/"
+            <h6 className="text-sm mr-2">Already have an account?</h6>
+            <NavLink
+              to="/signin"
               className="text-sm font-semibold text-secondary hover:text-accent underline hover:no-underline"
             >
-              Sign up!
-            </a>
+              Sign In!
+            </NavLink>
           </div>
         </section>
       </main>
@@ -86,4 +103,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

@@ -3,8 +3,8 @@ const Navbar = () => {
   let location = useLocation();
   location = location.pathname.replaceAll("/", "");
   // console.log(location);
-  let URL = window.location.href;
-  let result = URL.substr(0, URL.lastIndexOf("/"));
+  // let URL = window.location.href;
+  // let result = URL.substr(0, URL.lastIndexOf("/"));
   // console.log(result);
   let body = document.getElementsByTagName("body")[0];
   if (body.classList.length === 0) {
@@ -68,7 +68,7 @@ const Navbar = () => {
             </NavLink>
           </div>
           <div className="navbar-end">
-            <button className="btn btn-ghost btn-circle">
+            <label htmlFor="my-modal-4" className="btn btn-ghost btn-circle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -83,7 +83,18 @@ const Navbar = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </button>
+            </label>
+            <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+            <label htmlFor="my-modal-4" className="modal cursor-pointer">
+              <label className="modal-box relative" htmlFor="">
+              Search here...
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input w-full input-bordered input-primary"
+                />
+              </label>
+            </label>
             <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -100,20 +111,18 @@ const Navbar = () => {
                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                   />
                 </svg>
-                <span className="badge badge-xs badge-primary indicator-item"></span>
+                <span className="badge badge-xs badge-primary indicator-item "></span>
               </div>
             </button>
           </div>
         </nav>
-        <section className="container mx-auto">
-          <div class="text-sm breadcrumbs">
+        <section className="container mx-auto" id="bread">
+          <div className="text-sm breadcrumbs">
             <ul>
               <li>
                 <NavLink to="/">Home</NavLink>
               </li>
-              <li className="capitalize">
-              {location}
-              </li>
+              <li className="capitalize">{location}</li>
             </ul>
           </div>
         </section>

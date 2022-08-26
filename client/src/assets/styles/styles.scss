@@ -233,3 +233,11 @@ button.submit {
 input[type="email"] {
   color: $color-primary;
 }
+
+body.homepage #bread {
+  display: none;
+}
+
+body.homepage nav.navbar {
+  margin: 0;
+}
