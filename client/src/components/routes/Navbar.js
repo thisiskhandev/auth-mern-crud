@@ -87,7 +87,7 @@ const Navbar = () => {
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
             <label htmlFor="my-modal-4" className="modal cursor-pointer">
               <label className="modal-box relative" htmlFor="">
-              Search here...
+                Search here...
                 <input
                   type="text"
                   placeholder="Type here"
