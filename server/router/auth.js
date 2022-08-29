@@ -52,7 +52,7 @@ router.get("/get", async (req, res) => {
 });
 
 // login route
-router.get("/signin", async (req, res) => {
+router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -63,12 +63,12 @@ router.get("/signin", async (req, res) => {
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
-      const token = await userLogin.generateAuthToken();
+      token = await userLogin.generateAuthToken();
       console.log(token);
 
       // Creating cookies
       res.cookie("jwtoken", token, {
-        expires: new Date(Date.now() + 600000),
+        expires: new Date(Date.now() + 3600000),
         httpOnly: true,
       });
       // console.log(userLogin);

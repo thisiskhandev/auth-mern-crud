@@ -1,29 +1,38 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logos/Logo_Blogely.svg";
 
 const SignIn = () => {
-  const [inpval, setInpval] = useState({
-    email: "",
-    password: "",
-  });
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const setData = (e) => {
-    console.log(e.target.value);
-    const { name, value } = e.target;
-    setInpval((preval) => {
-      return {
-        ...preval,
-        [name]: value,
-      };
+  const LoginUser = async (e) => {
+    e.preventDefault();
+    const res = await fetch("/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     });
+    const data = res.json();
+    if (res.status === 400 || !data) {
+      alert("Invalid credentials!");
+    } else {
+      alert("Login is successful!");
+      navigate("/about");
+    }
   };
 
   return (
     <>
       <main className="login container mx-auto h-screen flex justify-center items-center">
         <section className="text-center max-w-full">
-          <form action="">
+          <form method="POST">
             <div>
               <img src={Logo} alt="Test" width="250" className="m-auto" />
               <h1 className="text-xl my-12">SignIn</h1>
@@ -34,16 +43,16 @@ const SignIn = () => {
                 placeholder="Email"
                 className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
                 name="email"
-                value={inpval.email}
-                onChange={setData}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
                 className="input input-bordered w-full mt-5 cursor-pointer bg-slate-100"
                 name="password"
-                value={inpval.password}
-                onChange={setData}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="flex items-center justify-between my-8">
@@ -66,7 +75,7 @@ const SignIn = () => {
               <button
                 type="submit"
                 className="btn btn-secondary  submit"
-                onClick={(e) => e.preventDefault()}
+                onClick={LoginUser}
               >
                 Sign In
               </button>
@@ -75,7 +84,7 @@ const SignIn = () => {
           <div className="mt-5 flex justify-center">
             <h6 className="text-sm mr-2">Don't have an account yet?</h6>
             <NavLink
-                  to="/signup"
+              to="/signup"
               className="text-sm font-semibold text-secondary hover:text-accent underline hover:no-underline"
             >
               Sign up!
