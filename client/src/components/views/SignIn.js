@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logos/Logo_Blogely.svg";
-
+import { ToastContainer, toast } from "react-toastify";
 const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -21,15 +21,42 @@ const SignIn = () => {
     });
     const data = res.json();
     if (res.status === 400 || !data) {
-      alert("Invalid credentials!");
+      toast.error("Invalid credentials!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+      });
     } else {
-      alert("Login is successful!");
+      toast.success("Login is successful!", {
+        position: "top-center",
+        autoClose: 1200,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      alert("Login sucess!")
       navigate("/about");
     }
   };
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <main className="login container mx-auto h-screen flex justify-center items-center">
         <section className="text-center max-w-full">
           <form method="POST">

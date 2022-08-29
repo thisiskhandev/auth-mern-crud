@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Authenticate = require("../middleware/authenticate");
 
 require("../db/conn");
 const User = require("../model/userSchema");
@@ -92,7 +93,7 @@ router.get("/", (req, res) => {
   res.send(`Hello from server - RouterJS`);
 });
 
-router.get("/about", middleware, (req, res) => {
+router.get("/about", Authenticate, (req, res) => {
   // res.cookie("test", "Khan");
   console.log(`About called!`);
   res.send(`Hello from server - About`);
