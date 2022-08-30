@@ -1,9 +1,39 @@
-import React from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import DefaultShot from "../../assets/images/default-shot.png";
 const About = () => {
+  const navigate = useNavigate();
+  const callAboutPage = async () => {
+    try {
+      const res = await fetch("/about", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        // Credentials will send data into server (backend), in our case we use cookies
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      navigate("/signin");
+    }
+  };
+  useEffect(() => {
+    callAboutPage();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <main className="container mx-auto about">
@@ -13,7 +43,11 @@ const About = () => {
             <div className="">
               <div className="avatar">
                 <div className="w-24 rounded">
-                  <img src="https://placeimg.com/192/192/people" alt="avatar" />
+                  <img
+                    src={DefaultShot}
+                    alt="avatar"
+                    lazyloading="true"
+                  />
                 </div>
               </div>
               <h3 className="my-5">Social Links</h3>

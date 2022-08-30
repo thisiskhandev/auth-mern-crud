@@ -13,17 +13,16 @@ const Authenticate = async (req, res, next) => {
       "tokens.token": token,
     });
     if (!rootUser) {
-      throw new Error("User not found 😒");
-    } else {
-      req.token = token;
-      //   rootUser means hamara user ka complete object
-      req.rootUser = rootUser;
-      req.userID = rootUser._id;
-      next();
+      throw new Error("User not found");
     }
-  } catch (error) {
-    res.staus(401).send("Unathorized: No toke provided!");
-    console.log(error);
+    req.token = token;
+    //   rootUser means hamara user ka complete object
+    req.rootUser = rootUser;
+    req.userID = rootUser._id;
+    next();
+  } catch (err) {
+    res.status(401).send("Unathorized: No token provided!");
+    console.log(err);
   }
 };
 
