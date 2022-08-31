@@ -68,7 +68,7 @@ router.post("/signin", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
       token = await userLogin.generateAuthToken();
-      console.log(token);
+      console.log("Token: " + token);
 
       // Creating cookies
       res.cookie("jwtoken", token, {
@@ -97,7 +97,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/about", authenticate, (req, res) => {
-  // res.cookie("test", "Khan");
+  // res.cookie("CookieName", "ThisIsCookie");
   console.log(`About called!`);
   res.send(req.rootUser);
 });

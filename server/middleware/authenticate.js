@@ -8,7 +8,7 @@ const Authenticate = async (req, res, next) => {
     // Verify token
     const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
     // Getting data of user with the help of token
-    const rootUser = await User.fineOne({
+    const rootUser = await User.findOne({
       _id: verifyToken._id,
       "tokens.token": token,
     });

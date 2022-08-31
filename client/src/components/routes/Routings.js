@@ -12,6 +12,14 @@ const Routings = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
+        <Route
+          path="/contact"
+          element={
+            <>
+              <h1>Contact Page</h1>
+            </>
+          }
+        />
       </Routes>
     </>
   );
